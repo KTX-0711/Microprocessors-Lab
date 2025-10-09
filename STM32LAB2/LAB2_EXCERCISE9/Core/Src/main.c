@@ -43,7 +43,116 @@
 TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
+int led_buffer[4] = {1,5,5,9};
+int hour = 15, minute = 59, second = 55;
+void display7SEG(int num) {
+    switch (num) {
+        case 0:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG1_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG2_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG3_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG4_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG5_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG6_Pin, SET);  // g = off
+            break;
 
+        case 1:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG1_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG2_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG3_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG4_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG5_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG6_Pin, SET);
+            break;
+
+        case 2:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG1_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG2_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG3_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG4_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG5_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG6_Pin, RESET);
+            break;
+
+        case 3:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG1_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG2_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG3_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG4_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG5_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG6_Pin, RESET);
+            break;
+
+        case 4:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG1_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG2_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG3_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG4_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG5_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG6_Pin, RESET);
+            break;
+
+        case 5:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG1_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG2_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG3_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG4_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG5_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG6_Pin, RESET);
+            break;
+
+        case 6:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG1_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG2_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG3_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG4_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG5_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG6_Pin, RESET);
+            break;
+
+        case 7:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG1_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG2_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG3_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG4_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG5_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG6_Pin, SET);
+            break;
+
+        case 8:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG1_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG2_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG3_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG4_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG5_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG6_Pin, RESET);
+            break;
+
+        case 9:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG1_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG2_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG3_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG4_Pin, SET);
+            HAL_GPIO_WritePin(GPIOB, SEG5_Pin, RESET);
+            HAL_GPIO_WritePin(GPIOB, SEG6_Pin, RESET);
+            break;
+
+        default:
+            HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|
+                                       SEG3_Pin|SEG4_Pin|SEG5_Pin|SEG6_Pin, SET);
+            break;
+    }
+}
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -56,19 +165,91 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int timer2_counter = 0;
+int timer2_flag = 0;
+int timer3_counter = 0;
+int timer3_flag = 0;
 int timer0_counter = 0;
 int timer0_flag = 0;
+int TIMER_CYCLE = 10;
 int timer1_counter = 0;
 int timer1_flag = 0;
-void setTimer0(int duration){
-	  timer0_flag = 0;
-	  timer0_counter = duration;
+void updateClockBuffer(){
+	  led_buffer[0] = hour/10;
+	  led_buffer[1] = hour%10;
+	  led_buffer[2] = minute/10;
+	  led_buffer[3] = minute%10;
 }
-void setTimer1(int duration){
-	  timer1_flag = 0;
-	  timer1_counter = duration;
+
+void setTimer0(int duration ){
+	timer0_counter = duration/TIMER_CYCLE;
+	timer0_flag = 0;
+}
+void setTimer1(int duration ){
+	timer1_counter = duration/TIMER_CYCLE;
+	timer1_flag = 0;
+}
+int index_led = 0;
+
+ void update7SEG(int index){
+	  if (index >= 4) index = 0;
+	  switch (index){
+		  case 0:
+			  // TO D0
+			  HAL_GPIO_WritePin(GPIOA, EN0_Pin, RESET);
+			  HAL_GPIO_WritePin(GPIOA, EN1_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN2_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN3_Pin, SET);
+			  display7SEG(led_buffer[0]);
+			  break;
+		  case 1:
+			  HAL_GPIO_WritePin(GPIOA, EN0_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN1_Pin, RESET);
+			  HAL_GPIO_WritePin(GPIOA, EN2_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN3_Pin, SET);
+			  display7SEG(led_buffer[1]);
+			  break;
+		  case 2:
+			  HAL_GPIO_WritePin(GPIOA, EN0_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN1_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN2_Pin, RESET);
+			  HAL_GPIO_WritePin(GPIOA, EN3_Pin, SET);
+			  display7SEG(led_buffer[2]);
+			  break;
+		  case 3:
+			  HAL_GPIO_WritePin(GPIOA, EN0_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN1_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN2_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN3_Pin, RESET);
+			  display7SEG(led_buffer[3]);
+			  break;
+		  default:
+			  HAL_GPIO_WritePin(GPIOA, EN0_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN1_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN2_Pin, SET);
+			  HAL_GPIO_WritePin(GPIOA, EN3_Pin, SET);
+			  display7SEG(0);
+			  break;
+
+	  }
+  }
+void setTimer2(int duration){
+	  timer2_flag = 0;
+	  timer2_counter = duration;
+}
+void setTimer3(int duration){
+	  timer3_flag = 0;
+	  timer3_counter = duration;
 }
 void time_run(){
+	if (timer2_counter > 0){
+		timer2_counter--;
+		if (timer2_counter == 0) timer2_flag = 1;
+	}
+	if (timer3_counter > 0){
+		timer3_counter--;
+		if (timer3_counter == 0) timer3_flag = 1;
+	}
 	if (timer0_counter > 0){
 		timer0_counter--;
 		if (timer0_counter == 0) timer0_flag = 1;
@@ -116,6 +297,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   const int MAX_LED_MATRIX = 8;
   int index_led_matrix = 0;
   uint8_t matrix_buffer[8] = {
@@ -319,21 +501,46 @@ int main(void)
 	  }
   }
 
-  setTimer0(2);
+  setTimer2(2);
   int index_col = 0;
-  setTimer1(100);
+  setTimer3(100);
   int shift_col = 0;
+  setTimer0(1000);
+  setTimer1(1000);
   while (1)
   {
-	  if (timer0_flag == 1){
-		  setTimer0(2);
+		if (timer0_flag == 1){
+			  setTimer0(1000);
+			  HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
+			  HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
+			  second++;
+			  if ( second >= 60) {
+				  second = 0;
+				  minute ++;
+			  }
+			  if ( minute >= 60) {
+				  minute = 0;
+				  hour ++;
+			  }
+			  if (hour >= 24){
+				  hour = 0;
+			  }
+			  updateClockBuffer();
+		}
+		if (timer1_flag == 1){
+			setTimer1(250);
+			update7SEG(index_led++);
+			if (index_led >=4) index_led = 0;
+		}
+	  if (timer2_flag == 1){
+		  setTimer2(2);
 		  updateLEDMatrix(index_col);
 		  updateROW(index_col + shift_col);
 		  index_col++;
 		  if (index_col >=8) index_col = 0;
 	  }
-	  if (timer1_flag == 1){
-		  setTimer1(100);
+	  if (timer3_flag == 1){
+		  setTimer3(100);
 		  shift_col++;
 		  if (shift_col >=8) shift_col = 0;
 	  }
