@@ -1,4 +1,0 @@
-input_processing.c:20:6:input_processing	16	static
-input_processing.c:61:5:CheckButton	16	static
-input_processing.c:70:5:CheckButton_1s	16	static
-input_processing.c:79:6:fsm_for_input_processing	16	static

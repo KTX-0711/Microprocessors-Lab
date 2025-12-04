@@ -35,10 +35,10 @@ typedef struct {
 
 typedef struct {
     void (*pTask)(void);
-    uint32_t Delay;       // Delay ban đầu (để dùng cho task định kỳ)
-    uint32_t Period;      // Chu kỳ lặp lại
-    uint32_t RunMe;       // Cờ báo chạy (có thể bỏ nếu check trực tiếp)
-    uint32_t TaskID;      // ID của task
+    uint32_t Delay;
+    uint32_t Period;
+    uint32_t RunMe;
+    uint32_t TaskID;
 
     uint32_t NextRunTime;
 } sTask;

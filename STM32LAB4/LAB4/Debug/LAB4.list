@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  00020050  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000e301  00000000  00000000  00020079  2**0
+ 12 .debug_info   0000e2e5  00000000  00000000  00020079  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000023b3  00000000  00000000  0002e37a  2**0
+ 13 .debug_abbrev 000023a8  00000000  00000000  0002e35e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000aa0  00000000  00000000  00030730  2**3
+ 14 .debug_aranges 00000aa0  00000000  00000000  00030708  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 000009d8  00000000  00000000  000311d0  2**3
+ 15 .debug_ranges 000009d8  00000000  00000000  000311a8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00017b49  00000000  00000000  00031ba8  2**0
+ 16 .debug_macro  00017b49  00000000  00000000  00031b80  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000c784  00000000  00000000  000496f1  2**0
+ 17 .debug_line   0000c797  00000000  00000000  000496c9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00085996  00000000  00000000  00055e75  2**0
+ 18 .debug_str    00085996  00000000  00000000  00055e60  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000db80b  2**0
+ 19 .comment      00000053  00000000  00000000  000db7f6  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00002a30  00000000  00000000  000db860  2**2
+ 20 .debug_frame  00002a28  00000000  00000000  000db84c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2587,22 +2587,22 @@ int main(void)
  800130e:	220a      	movs	r2, #10
  8001310:	2100      	movs	r1, #0
  8001312:	480b      	ldr	r0, [pc, #44]	; (8001340 <main+0x50>)
- 8001314:	f000 f97a 	bl	800160c <SCH_Add_Task>
+ 8001314:	f000 f94e 	bl	80015b4 <SCH_Add_Task>
   SCH_Add_Task(fsm_for_input_processing,0,10);
  8001318:	220a      	movs	r2, #10
  800131a:	2100      	movs	r1, #0
  800131c:	4809      	ldr	r0, [pc, #36]	; (8001344 <main+0x54>)
- 800131e:	f000 f975 	bl	800160c <SCH_Add_Task>
+ 800131e:	f000 f949 	bl	80015b4 <SCH_Add_Task>
   SCH_Add_Task(display_digit, 2, 250);
  8001322:	22fa      	movs	r2, #250	; 0xfa
  8001324:	2102      	movs	r1, #2
  8001326:	4808      	ldr	r0, [pc, #32]	; (8001348 <main+0x58>)
- 8001328:	f000 f970 	bl	800160c <SCH_Add_Task>
+ 8001328:	f000 f944 	bl	80015b4 <SCH_Add_Task>
   SCH_Add_Task(fsm_traffic_light,10,10);
  800132c:	220a      	movs	r2, #10
  800132e:	210a      	movs	r1, #10
  8001330:	4806      	ldr	r0, [pc, #24]	; (800134c <main+0x5c>)
- 8001332:	f000 f96b 	bl	800160c <SCH_Add_Task>
+ 8001332:	f000 f93f 	bl	80015b4 <SCH_Add_Task>
 //  SCH_Add_Task(ChuyenLED_YELLOW, 1000, 1000);
 //  SCH_Add_Task(ChuyenLED_GREEN, 1000, 1000);
 
@@ -2992,7 +2992,7 @@ __STATIC_FORCEINLINE void __disable_irq(void)
 08001548 <SCH_Init>:
 uint32_t global_tick_count = 0;
 
-// Định nghĩa ngưỡng tràn số (Ví dụ 1 tỷ)
+
 #define TICK_OVERFLOW_THRESHOLD 1000000000
 
 void SCH_Init(void) {
@@ -3030,236 +3030,226 @@ void SCH_Init(void) {
 
 0800157c <SCH_Update>:
 
-// --- HÀM UPDATE: XỬ LÝ ĐỒNG BỘ KHI TRÀN SỐ ---
+
 void SCH_Update(void) {
  800157c:	b480      	push	{r7}
- 800157e:	b083      	sub	sp, #12
- 8001580:	af00      	add	r7, sp, #0
+ 800157e:	af00      	add	r7, sp, #0
     global_tick_count++;
- 8001582:	4b1e      	ldr	r3, [pc, #120]	; (80015fc <SCH_Update+0x80>)
- 8001584:	681b      	ldr	r3, [r3, #0]
- 8001586:	3301      	adds	r3, #1
- 8001588:	4a1c      	ldr	r2, [pc, #112]	; (80015fc <SCH_Update+0x80>)
- 800158a:	6013      	str	r3, [r2, #0]
-
-    // Nếu chạm ngưỡng 1 tỷ
+ 8001580:	4b09      	ldr	r3, [pc, #36]	; (80015a8 <SCH_Update+0x2c>)
+ 8001582:	681b      	ldr	r3, [r3, #0]
+ 8001584:	3301      	adds	r3, #1
+ 8001586:	4a08      	ldr	r2, [pc, #32]	; (80015a8 <SCH_Update+0x2c>)
+ 8001588:	6013      	str	r3, [r2, #0]
     if (global_tick_count >= TICK_OVERFLOW_THRESHOLD) {
- 800158c:	4b1b      	ldr	r3, [pc, #108]	; (80015fc <SCH_Update+0x80>)
- 800158e:	681b      	ldr	r3, [r3, #0]
- 8001590:	4a1b      	ldr	r2, [pc, #108]	; (8001600 <SCH_Update+0x84>)
- 8001592:	4293      	cmp	r3, r2
- 8001594:	d92c      	bls.n	80015f0 <SCH_Update+0x74>
+ 800158a:	4b07      	ldr	r3, [pc, #28]	; (80015a8 <SCH_Update+0x2c>)
+ 800158c:	681b      	ldr	r3, [r3, #0]
+ 800158e:	4a07      	ldr	r2, [pc, #28]	; (80015ac <SCH_Update+0x30>)
+ 8001590:	4293      	cmp	r3, r2
+ 8001592:	d905      	bls.n	80015a0 <SCH_Update+0x24>
 
-        // 1. Reset biến đếm toàn cục
         global_tick_count -= TICK_OVERFLOW_THRESHOLD;
- 8001596:	4b19      	ldr	r3, [pc, #100]	; (80015fc <SCH_Update+0x80>)
- 8001598:	681a      	ldr	r2, [r3, #0]
- 800159a:	4b1a      	ldr	r3, [pc, #104]	; (8001604 <SCH_Update+0x88>)
- 800159c:	4413      	add	r3, r2
- 800159e:	4a17      	ldr	r2, [pc, #92]	; (80015fc <SCH_Update+0x80>)
- 80015a0:	6013      	str	r3, [r2, #0]
-
-        // 2. Đồng bộ lại thời gian mục tiêu của TẤT CẢ các task
-        // Để đảm bảo tính tương đối của thời gian không bị sai lệch
-        for (int i = 0; i < MAX_TASKS; i++) {
- 80015a2:	2300      	movs	r3, #0
- 80015a4:	607b      	str	r3, [r7, #4]
- 80015a6:	e020      	b.n	80015ea <SCH_Update+0x6e>
-            if (SCH_tasks_G[i].pTask) { // Nếu task đang tồn tại
- 80015a8:	4917      	ldr	r1, [pc, #92]	; (8001608 <SCH_Update+0x8c>)
- 80015aa:	687a      	ldr	r2, [r7, #4]
- 80015ac:	4613      	mov	r3, r2
- 80015ae:	005b      	lsls	r3, r3, #1
- 80015b0:	4413      	add	r3, r2
- 80015b2:	00db      	lsls	r3, r3, #3
- 80015b4:	440b      	add	r3, r1
- 80015b6:	681b      	ldr	r3, [r3, #0]
- 80015b8:	2b00      	cmp	r3, #0
- 80015ba:	d013      	beq.n	80015e4 <SCH_Update+0x68>
-                // Trừ NextRunTime đi 1 lượng tương ứng
-                SCH_tasks_G[i].NextRunTime -= TICK_OVERFLOW_THRESHOLD;
- 80015bc:	4912      	ldr	r1, [pc, #72]	; (8001608 <SCH_Update+0x8c>)
- 80015be:	687a      	ldr	r2, [r7, #4]
- 80015c0:	4613      	mov	r3, r2
- 80015c2:	005b      	lsls	r3, r3, #1
- 80015c4:	4413      	add	r3, r2
- 80015c6:	00db      	lsls	r3, r3, #3
- 80015c8:	440b      	add	r3, r1
- 80015ca:	3314      	adds	r3, #20
- 80015cc:	681b      	ldr	r3, [r3, #0]
- 80015ce:	4a0d      	ldr	r2, [pc, #52]	; (8001604 <SCH_Update+0x88>)
- 80015d0:	441a      	add	r2, r3
- 80015d2:	480d      	ldr	r0, [pc, #52]	; (8001608 <SCH_Update+0x8c>)
- 80015d4:	6879      	ldr	r1, [r7, #4]
- 80015d6:	460b      	mov	r3, r1
- 80015d8:	005b      	lsls	r3, r3, #1
- 80015da:	440b      	add	r3, r1
- 80015dc:	00db      	lsls	r3, r3, #3
- 80015de:	4403      	add	r3, r0
- 80015e0:	3314      	adds	r3, #20
- 80015e2:	601a      	str	r2, [r3, #0]
-        for (int i = 0; i < MAX_TASKS; i++) {
- 80015e4:	687b      	ldr	r3, [r7, #4]
- 80015e6:	3301      	adds	r3, #1
- 80015e8:	607b      	str	r3, [r7, #4]
- 80015ea:	687b      	ldr	r3, [r7, #4]
- 80015ec:	2b13      	cmp	r3, #19
- 80015ee:	dddb      	ble.n	80015a8 <SCH_Update+0x2c>
-            }
-        }
+ 8001594:	4b04      	ldr	r3, [pc, #16]	; (80015a8 <SCH_Update+0x2c>)
+ 8001596:	681a      	ldr	r2, [r3, #0]
+ 8001598:	4b05      	ldr	r3, [pc, #20]	; (80015b0 <SCH_Update+0x34>)
+ 800159a:	4413      	add	r3, r2
+ 800159c:	4a02      	ldr	r2, [pc, #8]	; (80015a8 <SCH_Update+0x2c>)
+ 800159e:	6013      	str	r3, [r2, #0]
+//
+//                SCH_tasks_G[i].NextRunTime -= TICK_OVERFLOW_THRESHOLD;
+//            }
+//        }
     }
 }
- 80015f0:	bf00      	nop
- 80015f2:	370c      	adds	r7, #12
- 80015f4:	46bd      	mov	sp, r7
- 80015f6:	bc80      	pop	{r7}
- 80015f8:	4770      	bx	lr
- 80015fa:	bf00      	nop
- 80015fc:	200000d4 	.word	0x200000d4
- 8001600:	3b9ac9ff 	.word	0x3b9ac9ff
- 8001604:	c4653600 	.word	0xc4653600
- 8001608:	20000120 	.word	0x20000120
+ 80015a0:	bf00      	nop
+ 80015a2:	46bd      	mov	sp, r7
+ 80015a4:	bc80      	pop	{r7}
+ 80015a6:	4770      	bx	lr
+ 80015a8:	200000d4 	.word	0x200000d4
+ 80015ac:	3b9ac9ff 	.word	0x3b9ac9ff
+ 80015b0:	c4653600 	.word	0xc4653600
 
-0800160c <SCH_Add_Task>:
+080015b4 <SCH_Add_Task>:
 
 uint32_t SCH_Add_Task(void (*pF)(void), uint32_t DELAY, uint32_t PERIOD) {
- 800160c:	b480      	push	{r7}
- 800160e:	b087      	sub	sp, #28
- 8001610:	af00      	add	r7, sp, #0
- 8001612:	60f8      	str	r0, [r7, #12]
- 8001614:	60b9      	str	r1, [r7, #8]
- 8001616:	607a      	str	r2, [r7, #4]
+ 80015b4:	b480      	push	{r7}
+ 80015b6:	b087      	sub	sp, #28
+ 80015b8:	af00      	add	r7, sp, #0
+ 80015ba:	60f8      	str	r0, [r7, #12]
+ 80015bc:	60b9      	str	r1, [r7, #8]
+ 80015be:	607a      	str	r2, [r7, #4]
     unsigned char Index = 0;
- 8001618:	2300      	movs	r3, #0
- 800161a:	75fb      	strb	r3, [r7, #23]
+ 80015c0:	2300      	movs	r3, #0
+ 80015c2:	75fb      	strb	r3, [r7, #23]
 
     while ((SCH_tasks_G[Index].pTask != 0) && (Index < MAX_TASKS)) {
- 800161c:	e002      	b.n	8001624 <SCH_Add_Task+0x18>
+ 80015c4:	e002      	b.n	80015cc <SCH_Add_Task+0x18>
         Index++;
- 800161e:	7dfb      	ldrb	r3, [r7, #23]
- 8001620:	3301      	adds	r3, #1
- 8001622:	75fb      	strb	r3, [r7, #23]
+ 80015c6:	7dfb      	ldrb	r3, [r7, #23]
+ 80015c8:	3301      	adds	r3, #1
+ 80015ca:	75fb      	strb	r3, [r7, #23]
     while ((SCH_tasks_G[Index].pTask != 0) && (Index < MAX_TASKS)) {
- 8001624:	7dfa      	ldrb	r2, [r7, #23]
- 8001626:	4932      	ldr	r1, [pc, #200]	; (80016f0 <SCH_Add_Task+0xe4>)
- 8001628:	4613      	mov	r3, r2
- 800162a:	005b      	lsls	r3, r3, #1
- 800162c:	4413      	add	r3, r2
- 800162e:	00db      	lsls	r3, r3, #3
- 8001630:	440b      	add	r3, r1
- 8001632:	681b      	ldr	r3, [r3, #0]
- 8001634:	2b00      	cmp	r3, #0
- 8001636:	d002      	beq.n	800163e <SCH_Add_Task+0x32>
- 8001638:	7dfb      	ldrb	r3, [r7, #23]
- 800163a:	2b13      	cmp	r3, #19
- 800163c:	d9ef      	bls.n	800161e <SCH_Add_Task+0x12>
+ 80015cc:	7dfa      	ldrb	r2, [r7, #23]
+ 80015ce:	4946      	ldr	r1, [pc, #280]	; (80016e8 <SCH_Add_Task+0x134>)
+ 80015d0:	4613      	mov	r3, r2
+ 80015d2:	005b      	lsls	r3, r3, #1
+ 80015d4:	4413      	add	r3, r2
+ 80015d6:	00db      	lsls	r3, r3, #3
+ 80015d8:	440b      	add	r3, r1
+ 80015da:	681b      	ldr	r3, [r3, #0]
+ 80015dc:	2b00      	cmp	r3, #0
+ 80015de:	d002      	beq.n	80015e6 <SCH_Add_Task+0x32>
+ 80015e0:	7dfb      	ldrb	r3, [r7, #23]
+ 80015e2:	2b13      	cmp	r3, #19
+ 80015e4:	d9ef      	bls.n	80015c6 <SCH_Add_Task+0x12>
     }
 
     if (Index == MAX_TASKS) return MAX_TASKS; // Full
- 800163e:	7dfb      	ldrb	r3, [r7, #23]
- 8001640:	2b14      	cmp	r3, #20
- 8001642:	d101      	bne.n	8001648 <SCH_Add_Task+0x3c>
- 8001644:	2314      	movs	r3, #20
- 8001646:	e04e      	b.n	80016e6 <SCH_Add_Task+0xda>
+ 80015e6:	7dfb      	ldrb	r3, [r7, #23]
+ 80015e8:	2b14      	cmp	r3, #20
+ 80015ea:	d101      	bne.n	80015f0 <SCH_Add_Task+0x3c>
+ 80015ec:	2314      	movs	r3, #20
+ 80015ee:	e075      	b.n	80016dc <SCH_Add_Task+0x128>
 
     SCH_tasks_G[Index].pTask = pF;
- 8001648:	7dfa      	ldrb	r2, [r7, #23]
- 800164a:	4929      	ldr	r1, [pc, #164]	; (80016f0 <SCH_Add_Task+0xe4>)
- 800164c:	4613      	mov	r3, r2
- 800164e:	005b      	lsls	r3, r3, #1
- 8001650:	4413      	add	r3, r2
- 8001652:	00db      	lsls	r3, r3, #3
- 8001654:	440b      	add	r3, r1
- 8001656:	68fa      	ldr	r2, [r7, #12]
- 8001658:	601a      	str	r2, [r3, #0]
+ 80015f0:	7dfa      	ldrb	r2, [r7, #23]
+ 80015f2:	493d      	ldr	r1, [pc, #244]	; (80016e8 <SCH_Add_Task+0x134>)
+ 80015f4:	4613      	mov	r3, r2
+ 80015f6:	005b      	lsls	r3, r3, #1
+ 80015f8:	4413      	add	r3, r2
+ 80015fa:	00db      	lsls	r3, r3, #3
+ 80015fc:	440b      	add	r3, r1
+ 80015fe:	68fa      	ldr	r2, [r7, #12]
+ 8001600:	601a      	str	r2, [r3, #0]
     SCH_tasks_G[Index].Delay = DELAY / 10;
- 800165a:	7dfa      	ldrb	r2, [r7, #23]
- 800165c:	68bb      	ldr	r3, [r7, #8]
- 800165e:	4925      	ldr	r1, [pc, #148]	; (80016f4 <SCH_Add_Task+0xe8>)
- 8001660:	fba1 1303 	umull	r1, r3, r1, r3
- 8001664:	08d9      	lsrs	r1, r3, #3
- 8001666:	4822      	ldr	r0, [pc, #136]	; (80016f0 <SCH_Add_Task+0xe4>)
- 8001668:	4613      	mov	r3, r2
- 800166a:	005b      	lsls	r3, r3, #1
- 800166c:	4413      	add	r3, r2
- 800166e:	00db      	lsls	r3, r3, #3
- 8001670:	4403      	add	r3, r0
- 8001672:	3304      	adds	r3, #4
- 8001674:	6019      	str	r1, [r3, #0]
+ 8001602:	7dfa      	ldrb	r2, [r7, #23]
+ 8001604:	68bb      	ldr	r3, [r7, #8]
+ 8001606:	4939      	ldr	r1, [pc, #228]	; (80016ec <SCH_Add_Task+0x138>)
+ 8001608:	fba1 1303 	umull	r1, r3, r1, r3
+ 800160c:	08d9      	lsrs	r1, r3, #3
+ 800160e:	4836      	ldr	r0, [pc, #216]	; (80016e8 <SCH_Add_Task+0x134>)
+ 8001610:	4613      	mov	r3, r2
+ 8001612:	005b      	lsls	r3, r3, #1
+ 8001614:	4413      	add	r3, r2
+ 8001616:	00db      	lsls	r3, r3, #3
+ 8001618:	4403      	add	r3, r0
+ 800161a:	3304      	adds	r3, #4
+ 800161c:	6019      	str	r1, [r3, #0]
     SCH_tasks_G[Index].Period = PERIOD / 10;
- 8001676:	7dfa      	ldrb	r2, [r7, #23]
- 8001678:	687b      	ldr	r3, [r7, #4]
- 800167a:	491e      	ldr	r1, [pc, #120]	; (80016f4 <SCH_Add_Task+0xe8>)
- 800167c:	fba1 1303 	umull	r1, r3, r1, r3
- 8001680:	08d9      	lsrs	r1, r3, #3
- 8001682:	481b      	ldr	r0, [pc, #108]	; (80016f0 <SCH_Add_Task+0xe4>)
+ 800161e:	7dfa      	ldrb	r2, [r7, #23]
+ 8001620:	687b      	ldr	r3, [r7, #4]
+ 8001622:	4932      	ldr	r1, [pc, #200]	; (80016ec <SCH_Add_Task+0x138>)
+ 8001624:	fba1 1303 	umull	r1, r3, r1, r3
+ 8001628:	08d9      	lsrs	r1, r3, #3
+ 800162a:	482f      	ldr	r0, [pc, #188]	; (80016e8 <SCH_Add_Task+0x134>)
+ 800162c:	4613      	mov	r3, r2
+ 800162e:	005b      	lsls	r3, r3, #1
+ 8001630:	4413      	add	r3, r2
+ 8001632:	00db      	lsls	r3, r3, #3
+ 8001634:	4403      	add	r3, r0
+ 8001636:	3308      	adds	r3, #8
+ 8001638:	6019      	str	r1, [r3, #0]
+    SCH_tasks_G[Index].TaskID = Index;
+ 800163a:	7dfa      	ldrb	r2, [r7, #23]
+ 800163c:	7df9      	ldrb	r1, [r7, #23]
+ 800163e:	482a      	ldr	r0, [pc, #168]	; (80016e8 <SCH_Add_Task+0x134>)
+ 8001640:	4613      	mov	r3, r2
+ 8001642:	005b      	lsls	r3, r3, #1
+ 8001644:	4413      	add	r3, r2
+ 8001646:	00db      	lsls	r3, r3, #3
+ 8001648:	4403      	add	r3, r0
+ 800164a:	3310      	adds	r3, #16
+ 800164c:	6019      	str	r1, [r3, #0]
+    SCH_tasks_G[Index].RunMe = 0;
+ 800164e:	7dfa      	ldrb	r2, [r7, #23]
+ 8001650:	4925      	ldr	r1, [pc, #148]	; (80016e8 <SCH_Add_Task+0x134>)
+ 8001652:	4613      	mov	r3, r2
+ 8001654:	005b      	lsls	r3, r3, #1
+ 8001656:	4413      	add	r3, r2
+ 8001658:	00db      	lsls	r3, r3, #3
+ 800165a:	440b      	add	r3, r1
+ 800165c:	330c      	adds	r3, #12
+ 800165e:	2200      	movs	r2, #0
+ 8001660:	601a      	str	r2, [r3, #0]
+
+    if (global_tick_count + SCH_tasks_G[Index].Delay >= TICK_OVERFLOW_THRESHOLD) SCH_tasks_G[Index].NextRunTime = global_tick_count + SCH_tasks_G[Index].Delay - TICK_OVERFLOW_THRESHOLD;
+ 8001662:	7dfa      	ldrb	r2, [r7, #23]
+ 8001664:	4920      	ldr	r1, [pc, #128]	; (80016e8 <SCH_Add_Task+0x134>)
+ 8001666:	4613      	mov	r3, r2
+ 8001668:	005b      	lsls	r3, r3, #1
+ 800166a:	4413      	add	r3, r2
+ 800166c:	00db      	lsls	r3, r3, #3
+ 800166e:	440b      	add	r3, r1
+ 8001670:	3304      	adds	r3, #4
+ 8001672:	681a      	ldr	r2, [r3, #0]
+ 8001674:	4b1e      	ldr	r3, [pc, #120]	; (80016f0 <SCH_Add_Task+0x13c>)
+ 8001676:	681b      	ldr	r3, [r3, #0]
+ 8001678:	4413      	add	r3, r2
+ 800167a:	4a1e      	ldr	r2, [pc, #120]	; (80016f4 <SCH_Add_Task+0x140>)
+ 800167c:	4293      	cmp	r3, r2
+ 800167e:	d917      	bls.n	80016b0 <SCH_Add_Task+0xfc>
+ 8001680:	7dfa      	ldrb	r2, [r7, #23]
+ 8001682:	4919      	ldr	r1, [pc, #100]	; (80016e8 <SCH_Add_Task+0x134>)
  8001684:	4613      	mov	r3, r2
  8001686:	005b      	lsls	r3, r3, #1
  8001688:	4413      	add	r3, r2
  800168a:	00db      	lsls	r3, r3, #3
- 800168c:	4403      	add	r3, r0
- 800168e:	3308      	adds	r3, #8
- 8001690:	6019      	str	r1, [r3, #0]
-    SCH_tasks_G[Index].TaskID = Index;
- 8001692:	7dfa      	ldrb	r2, [r7, #23]
- 8001694:	7df9      	ldrb	r1, [r7, #23]
- 8001696:	4816      	ldr	r0, [pc, #88]	; (80016f0 <SCH_Add_Task+0xe4>)
- 8001698:	4613      	mov	r3, r2
- 800169a:	005b      	lsls	r3, r3, #1
- 800169c:	4413      	add	r3, r2
- 800169e:	00db      	lsls	r3, r3, #3
- 80016a0:	4403      	add	r3, r0
- 80016a2:	3310      	adds	r3, #16
- 80016a4:	6019      	str	r1, [r3, #0]
-    SCH_tasks_G[Index].RunMe = 0;
- 80016a6:	7dfa      	ldrb	r2, [r7, #23]
- 80016a8:	4911      	ldr	r1, [pc, #68]	; (80016f0 <SCH_Add_Task+0xe4>)
- 80016aa:	4613      	mov	r3, r2
- 80016ac:	005b      	lsls	r3, r3, #1
- 80016ae:	4413      	add	r3, r2
- 80016b0:	00db      	lsls	r3, r3, #3
- 80016b2:	440b      	add	r3, r1
- 80016b4:	330c      	adds	r3, #12
- 80016b6:	2200      	movs	r2, #0
- 80016b8:	601a      	str	r2, [r3, #0]
+ 800168c:	440b      	add	r3, r1
+ 800168e:	3304      	adds	r3, #4
+ 8001690:	681a      	ldr	r2, [r3, #0]
+ 8001692:	4b17      	ldr	r3, [pc, #92]	; (80016f0 <SCH_Add_Task+0x13c>)
+ 8001694:	681b      	ldr	r3, [r3, #0]
+ 8001696:	4413      	add	r3, r2
+ 8001698:	7df9      	ldrb	r1, [r7, #23]
+ 800169a:	4a17      	ldr	r2, [pc, #92]	; (80016f8 <SCH_Add_Task+0x144>)
+ 800169c:	441a      	add	r2, r3
+ 800169e:	4812      	ldr	r0, [pc, #72]	; (80016e8 <SCH_Add_Task+0x134>)
+ 80016a0:	460b      	mov	r3, r1
+ 80016a2:	005b      	lsls	r3, r3, #1
+ 80016a4:	440b      	add	r3, r1
+ 80016a6:	00db      	lsls	r3, r3, #3
+ 80016a8:	4403      	add	r3, r0
+ 80016aa:	3314      	adds	r3, #20
+ 80016ac:	601a      	str	r2, [r3, #0]
+ 80016ae:	e014      	b.n	80016da <SCH_Add_Task+0x126>
+    else SCH_tasks_G[Index].NextRunTime = global_tick_count + SCH_tasks_G[Index].Delay;
+ 80016b0:	7dfa      	ldrb	r2, [r7, #23]
+ 80016b2:	490d      	ldr	r1, [pc, #52]	; (80016e8 <SCH_Add_Task+0x134>)
+ 80016b4:	4613      	mov	r3, r2
+ 80016b6:	005b      	lsls	r3, r3, #1
+ 80016b8:	4413      	add	r3, r2
+ 80016ba:	00db      	lsls	r3, r3, #3
+ 80016bc:	440b      	add	r3, r1
+ 80016be:	3304      	adds	r3, #4
+ 80016c0:	6819      	ldr	r1, [r3, #0]
+ 80016c2:	4b0b      	ldr	r3, [pc, #44]	; (80016f0 <SCH_Add_Task+0x13c>)
+ 80016c4:	681b      	ldr	r3, [r3, #0]
+ 80016c6:	7dfa      	ldrb	r2, [r7, #23]
+ 80016c8:	4419      	add	r1, r3
+ 80016ca:	4807      	ldr	r0, [pc, #28]	; (80016e8 <SCH_Add_Task+0x134>)
+ 80016cc:	4613      	mov	r3, r2
+ 80016ce:	005b      	lsls	r3, r3, #1
+ 80016d0:	4413      	add	r3, r2
+ 80016d2:	00db      	lsls	r3, r3, #3
+ 80016d4:	4403      	add	r3, r0
+ 80016d6:	3314      	adds	r3, #20
+ 80016d8:	6019      	str	r1, [r3, #0]
 
-    // Tính NextRunTime bình thường.
-    // Lưu ý: Nếu global + Delay vượt quá 4 tỷ (uint32) thì mới lo,
-    // còn vượt quá 1 tỷ thì kệ nó, hàm SCH_Update sẽ tự xử lý khi global đuổi kịp 1 tỷ.
-    SCH_tasks_G[Index].NextRunTime = global_tick_count + SCH_tasks_G[Index].Delay;
- 80016ba:	7dfa      	ldrb	r2, [r7, #23]
- 80016bc:	490c      	ldr	r1, [pc, #48]	; (80016f0 <SCH_Add_Task+0xe4>)
- 80016be:	4613      	mov	r3, r2
- 80016c0:	005b      	lsls	r3, r3, #1
- 80016c2:	4413      	add	r3, r2
- 80016c4:	00db      	lsls	r3, r3, #3
- 80016c6:	440b      	add	r3, r1
- 80016c8:	3304      	adds	r3, #4
- 80016ca:	6819      	ldr	r1, [r3, #0]
- 80016cc:	4b0a      	ldr	r3, [pc, #40]	; (80016f8 <SCH_Add_Task+0xec>)
- 80016ce:	681b      	ldr	r3, [r3, #0]
- 80016d0:	7dfa      	ldrb	r2, [r7, #23]
- 80016d2:	4419      	add	r1, r3
- 80016d4:	4806      	ldr	r0, [pc, #24]	; (80016f0 <SCH_Add_Task+0xe4>)
- 80016d6:	4613      	mov	r3, r2
- 80016d8:	005b      	lsls	r3, r3, #1
- 80016da:	4413      	add	r3, r2
- 80016dc:	00db      	lsls	r3, r3, #3
- 80016de:	4403      	add	r3, r0
- 80016e0:	3314      	adds	r3, #20
- 80016e2:	6019      	str	r1, [r3, #0]
+//    SCH_tasks_G[Index].NextRunTime = global_tick_count + SCH_tasks_G[Index].Delay;
 
     return Index;
- 80016e4:	7dfb      	ldrb	r3, [r7, #23]
+ 80016da:	7dfb      	ldrb	r3, [r7, #23]
 }
- 80016e6:	4618      	mov	r0, r3
- 80016e8:	371c      	adds	r7, #28
- 80016ea:	46bd      	mov	sp, r7
- 80016ec:	bc80      	pop	{r7}
- 80016ee:	4770      	bx	lr
- 80016f0:	20000120 	.word	0x20000120
- 80016f4:	cccccccd 	.word	0xcccccccd
- 80016f8:	200000d4 	.word	0x200000d4
+ 80016dc:	4618      	mov	r0, r3
+ 80016de:	371c      	adds	r7, #28
+ 80016e0:	46bd      	mov	sp, r7
+ 80016e2:	bc80      	pop	{r7}
+ 80016e4:	4770      	bx	lr
+ 80016e6:	bf00      	nop
+ 80016e8:	20000120 	.word	0x20000120
+ 80016ec:	cccccccd 	.word	0xcccccccd
+ 80016f0:	200000d4 	.word	0x200000d4
+ 80016f4:	3b9ac9ff 	.word	0x3b9ac9ff
+ 80016f8:	c4653600 	.word	0xc4653600
 
 080016fc <SCH_Dispatch_Tasks>:
 
@@ -3284,9 +3274,6 @@ void SCH_Dispatch_Tasks(void) {
  8001716:	681b      	ldr	r3, [r3, #0]
  8001718:	2b00      	cmp	r3, #0
  800171a:	d042      	beq.n	80017a2 <SCH_Dispatch_Tasks+0xa6>
-            // Phép so sánh này vẫn đúng tuyệt đối nhờ tính chất Overflow của số nguyên
-            // Dù sau khi trừ đi 1 tỷ, giá trị NextRunTime có thể thành số rất lớn (do underflow)
-            // nhưng khi ép kiểu (int32_t), hiệu số vẫn ra đúng giá trị âm/dương mong muốn.
             if ((int32_t)(global_tick_count - SCH_tasks_G[Index].NextRunTime) >= 0) {
  800171c:	4b27      	ldr	r3, [pc, #156]	; (80017bc <SCH_Dispatch_Tasks+0xc0>)
  800171e:	6819      	ldr	r1, [r3, #0]
